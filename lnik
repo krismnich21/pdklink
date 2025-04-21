@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GitHub PDF Link Generator</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f0f0f0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+      margin: 0;
+    }
+    .container {
+      background: #fff;
+      padding: 30px;
+      border-radius: 10px;
+      box-shadow: 0 0 10px rgba(0,0,0,0.1);
+      text-align: center;
+    }
+    input[type="text"] {
+      width: 80%;
+      padding: 10px;
+      margin: 10px 0;
+    }
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #0057a4;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      cursor: pointer;
+    }
+    .output {
+      margin-top: 20px;
+      word-wrap: break-word;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h2>GitHub PDF Link Generator</h2>
+    <input type="text" id="filename" placeholder="Enter PDF filename (e.g., brochure.pdf)" />
+    <button onclick="generateLink()">Generate Link</button>
+    <div class="output" id="output"></div>
+  </div>
+
+  <script>
+    const githubUser = "krismnich21"; // Replace with your GitHub username
+    const repoName = "my-pdf-links"; // Replace with your repo name
+
+    function generateLink() {
+      const file = document.getElementById("filename").value.trim();
+      const output = document.getElementById("output");
+      if (file === '') {
+        output.innerHTML = '<span style="color:red;">Please enter a filename.</span>';
+        return;
+      }
+      const url = `https://github.com/${githubUser}/${repoName}/raw/main/${encodeURIComponent(file)}`;
+      output.innerHTML = `<strong>Link:</strong><br><a href="${url}" target="_blank">${url}</a>`;
+    }
+  </script>
+</body>
+</html>
