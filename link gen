@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>PDF Link Generator</title>
+  <style>
+    body { font-family: Arial, sans-serif; padding: 20px; }
+    input, button { padding: 10px; margin-top: 10px; width: 100%; }
+    #output { margin-top: 20px; }
+  </style>
+</head>
+<body>
+  <h2>Google Drive PDF Link Generator</h2>
+  <p>Paste the Google Drive Share Link:</p>
+  <input type="text" id="gdriveLink" placeholder="https://drive.google.com/file/d/..." />
+  <button onclick="generate()">Generate Direct Link</button>
+
+  <div id="output"></div>
+
+  <script>
+    function generate() {
+      const link = document.getElementById('gdriveLink').value.trim();
+      const match = link.match(/\/d\/([^\/]+)\//);
+      if (!match) {
+        document.getElementById('output').innerHTML = "<p style='color:red;'>Invalid Google Drive link.</p>";
+        return;
+      }
+      const fileId = match[1];
+      const directLink = `https://drive.google.com/uc?export=download&id=${fileId}`;
+      document.getElementById('output').innerHTML = `
+        <p style='color:green;'>Direct Download Link:</p>
+        <a href="${directLink}" target="_blank">${directLink}</a>
+      `;
+    }
+  </script>
+</body>
+</html>
